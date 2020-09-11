@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'SecondPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -54,14 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     // move next page
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _timerCount++;
-    });
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SecondPage())
+    );
   }
 
   void _startTimer() {
@@ -132,3 +129,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
