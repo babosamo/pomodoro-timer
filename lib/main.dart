@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'SecondPage.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -51,25 +52,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Timer _timer;
   int _timerCount = 0;
 
   void _incrementCounter() {
     // move next page
     Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SecondPage())
-    );
+        context, MaterialPageRoute(builder: (context) => SecondPage()));
   }
 
   void _startTimer() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _timerCount++;
-    });
+    if (_timer == null) {
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        setState(() {
+          _timerCount++;
+        });
+      });
+    } else {
+      if(_timer.isActive){
+        _timer.cancel();
+        _timer = null;
+      }
+    }
   }
 
   @override
@@ -129,5 +133,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
