@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
-import 'SecondPage.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
+
+import 'SecondPage.dart';
+import 'package:provider/provider.dart';
+import 'package:pomodoro_timer/model/Count.dart';
 
 class FirstPage extends StatefulWidget {
   FirstPage({Key key, this.title}) : super(key: key);
@@ -22,7 +26,6 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
   Timer _timer;
-  int _timerCount = 0;
 
   void _incrementCounter() {
     // move next page
@@ -30,23 +33,27 @@ class _FirstPageState extends State<FirstPage> {
         context, MaterialPageRoute(builder: (context) => SecondPage()));
   }
 
-  void _startTimer() {
-    if (_timer == null) {
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-        setState(() {
-          _timerCount++;
-        });
-      });
-    } else {
-      if(_timer.isActive){
-        _timer.cancel();
-        _timer = null;
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    final counter = Provider.of<Counter>(context);
+
+    void _startTimer() {
+      if (_timer == null) {
+        _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+          setState(() {
+            counter.increase();
+          });
+        });
+      } else {
+        if (_timer.isActive) {
+          _timer.cancel();
+          _timer = null;
+        }
+      }
+    }
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -83,7 +90,7 @@ class _FirstPageState extends State<FirstPage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_timerCount',
+              '${counter.getCounter()}',
               style: Theme.of(context).textTheme.headline4,
             ),
             IconButton(
