@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_timer/model/Count.dart';
+import 'package:pomodoro_timer/model/IssueItem.dart';
 import 'package:provider/provider.dart';
 
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<Counter>(context);
+
+    List<IssueItem> _list = [
+      IssueItem("POMODORO-1", "백그라운드 타이머 기능", 30.0),
+      IssueItem("POMODORO-2", "이동 감지", 120.0),
+      IssueItem("POMODORO-3", "이슈 리스트 등록하기", 15.0),
+      IssueItem("POMODORO-4", "이슈 리스트 뷰", 45.0)
+    ];
+
     return Scaffold(
         appBar: AppBar(title: Text('Second')),
         body: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
@@ -30,7 +25,17 @@ class SecondPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   }),
-              Text("${counter.getCounter()}")
+              Text("${counter.getCounter()}"),
+              Container(
+                  height: 500,
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: _list
+                        .map((issue) => ListTile(
+                            leading: Icon(Icons.create),
+                            title: Text(issue.name)))
+                        .toList(),
+                  ))
             ]));
   }
 }
