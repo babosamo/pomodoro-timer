@@ -31,15 +31,33 @@ class IssueItem {
   set name(String value) {
     _name = value;
   }
+
+  static String getIssueName(IssueItem issue) {
+    switch (issue.issueState) {
+      case IssueState.OPEN:
+        {
+          return "OPEN";
+        }
+      case IssueState.IN_PROGRESS:
+        {
+          return "IN_PROGRESS";
+        }
+      case IssueState.RESOLVED:
+        {
+          return "RESOLVED";
+        }
+      case IssueState.CLOSED:
+        {
+          return "CLOSED";
+        }
+      default:
+        {
+          return "OPEN";
+        }
+    }
+  }
 }
 
-enum IssueState{
-  OPEN,
-  IN_PROGRESS,
-  RESOLVED,
-  CLOSED
-}
+enum IssueState { OPEN, IN_PROGRESS, RESOLVED, CLOSED }
 
-class WorkLog{
-
-}
+class WorkLog {}

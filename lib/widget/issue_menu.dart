@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pomodoro_timer/model/IssueItem.dart';
 import 'package:pomodoro_timer/provider/IssueProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,9 @@ class _IssueMenuState extends State<IssueMenu> {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(issueProvider.selectedIssue?.name),
+            Text(issueProvider.selectedIssue.name),
+            Text(IssueItem.getIssueName(issueProvider.selectedIssue)),
+            Text("예상 시간 : ${issueProvider.selectedIssue.estimateTime}"),
             IconButton(
               icon: Icon(Icons.alarm),
             )
