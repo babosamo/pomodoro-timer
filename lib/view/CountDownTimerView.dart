@@ -46,16 +46,6 @@ class _CountDownTimerView extends State<CountDownTimerView>
     controller.duration = Duration(seconds: counter.getCounter());
 
     void _startTimer() {
-      if (controller.isAnimating) {
-        controller.duration = Duration(seconds: counter.getCounter());
-        controller.stop();
-      } else {
-        controller.reverse(
-            from: controller.value == 0.0
-                ? 1.0
-                : controller.value);
-      }
-
       if (_timer == null) {
         setState(() {
           _buttonTitle = "정지";
@@ -74,6 +64,17 @@ class _CountDownTimerView extends State<CountDownTimerView>
           _timer.cancel();
           _timer = null;
         }
+      }
+
+      if (controller.isAnimating) {
+        controller.duration = Duration(seconds: counter.getCounter());
+        controller.reverse(from: 0.0);
+        controller.stop();
+      } else {
+        controller.reverse(
+            from: controller.value == 0.0
+                ? 1.0
+                : controller.value);
       }
     }
 
