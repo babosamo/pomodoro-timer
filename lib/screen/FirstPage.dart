@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_timer/model/Count.dart';
-import 'package:pomodoro_timer/util/DateUtil.dart';
+import 'package:pomodoro_timer/util/ColorUtil.dart';
 import 'package:pomodoro_timer/view/CountDownTimerView.dart';
 import 'package:pomodoro_timer/widget/issue_menu.dart';
-import 'package:provider/provider.dart';
 
 import 'SecondPage.dart';
 
@@ -28,18 +26,31 @@ class _FirstPageState extends State<FirstPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: HexColor("#ff5f42"),
+        bottomOpacity: 0.0,
+        elevation: 0.0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            IssueMenu(),
-            SizedBox(height: 20),
-            CountDownTimerView()
-          ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [HexColor("#ff5f42"), HexColor("#ff0f53")]
+          )
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              IssueMenu(),
+              SizedBox(height: 30),
+              CountDownTimerView()
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: HexColor("#ff3b5b"),
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),

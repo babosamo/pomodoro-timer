@@ -18,7 +18,7 @@ class PomodoroApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: FirstPage(title: 'Flutter Demo Home Page'),
+          home: FirstPage(title: 'Pomodoro Timer!'),
         ));
   }
 }

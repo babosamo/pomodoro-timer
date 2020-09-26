@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pomodoro_timer/model/Count.dart';
+import 'package:pomodoro_timer/util/ColorUtil.dart';
 import 'package:pomodoro_timer/util/DateUtil.dart';
 import 'package:provider/provider.dart';
 
@@ -92,8 +93,8 @@ class _CountDownTimerView extends State<CountDownTimerView>
                         return CustomPaint(
                             painter: CountDownTimerPainter(
                               animation: controller,
-                              backgroundColor: Colors.pink,
-                              color: Colors.blue,
+                              backgroundColor: HexColor("#50ffffff"),
+                              color: Colors.white,
                             )
                         );
                       },
@@ -105,22 +106,24 @@ class _CountDownTimerView extends State<CountDownTimerView>
                         '${constructTime(counter.getCounter())}' ?? "",
                         style: TextStyle(
                             fontSize: 60,
-                            color: Colors.black
+                            color: Colors.white
                         )
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             MaterialButton(
-              color: Colors.blue,
+              color: HexColor("#ff0f53"),
               textColor: Colors.white,
               child: Text(
                 "$_buttonTitle",
               ),
               padding: EdgeInsets.all(24),
-              shape: CircleBorder(),
+              shape: CircleBorder(
+                side: BorderSide(width: 1, color: Colors.white)
+              ),
               onPressed: _startTimer,
             ),
           ],

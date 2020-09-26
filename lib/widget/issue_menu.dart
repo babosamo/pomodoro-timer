@@ -14,7 +14,12 @@ class _IssueMenuState extends State<IssueMenu> {
   Widget build(BuildContext context) {
     return Consumer<IssueProvider>(builder: (context, issueProvider, child) {
       if (issueProvider.selectedIssue == null) {
-        return Text("선택된 이슈가 없음");
+        return Text(
+          "선택된 이슈가 없음",
+          style: TextStyle(
+            color: Colors.white
+          ),
+        );
       } else {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
