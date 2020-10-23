@@ -10,15 +10,12 @@ import 'package:provider/provider.dart';
 import 'CountDownTimerPainter.dart';
 
 class CountDownTimerView extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => _CountDownTimerView();
-
 }
 
 class _CountDownTimerView extends State<CountDownTimerView>
     with TickerProviderStateMixin {
-
   Timer _timer;
   String _buttonTitle = "시작";
 
@@ -40,92 +37,85 @@ class _CountDownTimerView extends State<CountDownTimerView>
 
   @override
   Widget build(BuildContext context) {
+    return Consumer<Counter>(builder: (context, counter, child) {
+      controller.duration = Duration(seconds: counter?.getCounter() ?? 100);
+      print("counter update duration${controller.duration}");
+      void _startTimer() {
+        if (controller.isAnimating) {
+          controller.duration = Duration(seconds: counter.getCounter());
+          controller.stop();
+        } else {
+          controller.reverse(
+              from: controller.value == 0.0 ? 1.0 : controller.value);
+        }
 
-    final counter = Provider.of<Counter>(context);
-    controller.duration = Duration(seconds: counter.getCounter());
-
-    void _startTimer() {
-      if (controller.isAnimating) {
-        controller.duration = Duration(seconds: counter.getCounter());
-        controller.stop();
-      } else {
-        controller.reverse(
-            from: controller.value == 0.0
-                ? 1.0
-                : controller.value);
-      }
-
-      if (_timer == null) {
-        setState(() {
-          _buttonTitle = "정지";
-        });
-
-        _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-          counter.decrease();
-        });
-      } else {
-        if (_timer.isActive) {
+        if (_timer == null) {
           setState(() {
-            _buttonTitle = "시작";
+            _buttonTitle = "정지";
           });
 
-          counter.reset();
-          _timer.cancel();
-          _timer = null;
+          _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+            counter.decrease();
+          });
+        } else {
+          if (_timer.isActive) {
+            setState(() {
+              _buttonTitle = "시작";
+            });
+
+            counter.reset();
+            _timer.cancel();
+            _timer = null;
+          }
         }
       }
-    }
 
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            Container(
-              width: 300,
-              height: 300,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: AnimatedBuilder(
-                      animation: controller,
-                      builder: (BuildContext context, Widget child) {
-                        return CustomPaint(
-                            painter: CountDownTimerPainter(
-                              animation: controller,
-                              backgroundColor: Colors.pink,
-                              color: Colors.blue,
-                            )
-                        );
-                      },
+      return Container(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: 300,
+                height: 300,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: AnimatedBuilder(
+                        animation: controller,
+                        builder: (BuildContext context, Widget child) {
+                          return CustomPaint(
+                              painter: CountDownTimerPainter(
+                            animation: controller,
+                            backgroundColor: Colors.pink,
+                            color: Colors.blue,
+                          ));
+                        },
+                      ),
                     ),
-                  ),
-                  Align(
-                    alignment: FractionalOffset.center,
-                    child: Text(
-                        '${constructTime(counter.getCounter())}' ?? "",
-                        style: TextStyle(
-                            fontSize: 60,
-                            color: Colors.black
-                        )
+                    Align(
+                      alignment: FractionalOffset.center,
+                      child: Text(
+                          '${constructTime(counter.getCounter())}' ?? "",
+                          style: TextStyle(fontSize: 60, color: Colors.black)),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            MaterialButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              child: Text(
-                "$_buttonTitle",
+              SizedBox(height: 20),
+              MaterialButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                child: Text(
+                  "$_buttonTitle",
+                ),
+                padding: EdgeInsets.all(24),
+                shape: CircleBorder(),
+                onPressed: _startTimer,
               ),
-              padding: EdgeInsets.all(24),
-              shape: CircleBorder(),
-              onPressed: _startTimer,
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

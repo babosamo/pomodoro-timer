@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pomodoro_timer/model/Count.dart';
 import 'package:pomodoro_timer/provider/IssueProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -9,8 +10,12 @@ class IssueList extends StatefulWidget {
 }
 
 class _IssueListState extends State<IssueList> {
+  
   @override
   Widget build(BuildContext context) {
+    
+    final counter = Provider.of<Counter>(context);
+    
     return Consumer<IssueProvider>(builder: (context, provider, child) {
       if (provider.list != null) {
         return ListView(
@@ -22,6 +27,7 @@ class _IssueListState extends State<IssueList> {
                     title: Text(issue.name),
                     onTap: () => {
                       provider.setSelectedIssue(issue),
+                      counter.setInitCount(issue.estimateTime.toInt()),
                       Navigator.pop(context)
                     },
                   ),

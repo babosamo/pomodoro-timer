@@ -10,6 +10,12 @@ class Counter with ChangeNotifier {
     print("count is $_count");
   }
 
+  void setInitCount(count) {
+    _initialCount = count;
+    this._count = count;
+    notifyListeners();
+  }
+
   void increase() {
     _count++;
     notifyListeners();
@@ -22,9 +28,9 @@ class Counter with ChangeNotifier {
   }
 
   void reset() {
-    _count =_initialCount;
+    _count = _initialCount;
     notifyListeners();
   }
 
-  int getCounter() => _count;
+  int getCounter() => this._count;
 }
