@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_timer/model/Count.dart';
-import 'package:pomodoro_timer/util/DateUtil.dart';
 import 'package:pomodoro_timer/view/CountDownTimerView.dart';
 import 'package:pomodoro_timer/widget/issue_menu.dart';
-import 'package:provider/provider.dart';
 
 import 'SecondPage.dart';
 
