@@ -63,7 +63,6 @@ class _CountDownTimerView extends State<CountDownTimerView>
               _buttonTitle = "시작";
             });
 
-            counter.reset();
             _timer.cancel();
             _timer = null;
           }
