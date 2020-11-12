@@ -16,15 +16,12 @@ class _IssueMenuState extends State<IssueMenu> {
       if (issueProvider.selectedIssue == null) {
         return Text("선택된 이슈가 없음");
       } else {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(issueProvider.selectedIssue.name),
-            Text(IssueItem.getIssueName(issueProvider.selectedIssue)),
-            Text("예상 시간 : ${issueProvider.selectedIssue.estimateTime}"),
-            IconButton(
-              icon: Icon(Icons.alarm),
-            )
+            Text("타이틀    : ${issueProvider.selectedIssue.name}"),
+            Text("이슈상태 : ${IssueItem.getIssueName(issueProvider.selectedIssue)}"),
+            Text("예상시간 : ${issueProvider.selectedIssue.estimateTime}"),
           ],
         );
       }
