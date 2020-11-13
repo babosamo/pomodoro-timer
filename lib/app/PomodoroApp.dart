@@ -9,7 +9,7 @@ class PomodoroApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<Counter>(create: (_) => Counter(1500)),
+          ChangeNotifierProvider<Counter>(create: (_) => Counter(0)),
           ChangeNotifierProvider(create: (_) => IssueProvider())
         ],
         child: MaterialApp(

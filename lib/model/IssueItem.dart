@@ -32,8 +32,8 @@ class IssueItem {
     _name = value;
   }
 
-  static String getIssueName(IssueItem issue) {
-    switch (issue.issueState) {
+  static String getIssueStateName(IssueState issueState) {
+    switch (issueState) {
       case IssueState.OPEN:
         {
           return "OPEN";
@@ -59,5 +59,7 @@ class IssueItem {
 }
 
 enum IssueState { OPEN, IN_PROGRESS, RESOLVED, CLOSED }
+
+enum TimeUnit { DAY, HOUR, MINUTE}
 
 class WorkLog {}
