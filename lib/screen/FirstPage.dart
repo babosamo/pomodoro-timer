@@ -39,7 +39,7 @@ class _FirstPageState extends State<FirstPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(Icons.select_all),
       ),
     );
   }

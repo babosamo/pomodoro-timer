@@ -23,17 +23,7 @@ class SecondPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text('Second')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          RaisedButton(
-              child: Text('이전 페이지로'),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          Container(height: 500, child: IssueList()),
-        ],
-      ),
+      body: IssueList(),
       floatingActionButton: FloatingActionButton(
         onPressed: _goAddIssue,
         tooltip: 'Increment',

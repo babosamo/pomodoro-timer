@@ -39,7 +39,7 @@ class _CountDownTimerView extends State<CountDownTimerView>
   Widget build(BuildContext context) {
     return Consumer<Counter>(builder: (context, counter, child) {
       controller.duration = Duration(seconds: counter?.getCounter() ?? 100);
-      print("counter update duration${controller.duration}");
+      print("counter update duration ${controller.duration}");
       void _startTimer() {
         if (controller.isAnimating) {
           controller.duration = Duration(seconds: counter.getCounter());
