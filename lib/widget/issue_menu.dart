@@ -20,7 +20,7 @@ class _IssueMenuState extends State<IssueMenu> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text("타이틀    : ${issueProvider.selectedIssue.name}"),
-            Text("이슈상태 : ${IssueItem.getIssueStateName(issueProvider.selectedIssue.issueState)}"),
+            Text("이슈상태 : ${issueProvider.selectedIssue.issueState}"),
             Text("예상시간 : ${issueProvider.selectedIssue.estimateTime}"),
           ],
         );
